@@ -59,7 +59,7 @@ namespace TextProcessorRobot
                 case Keys.F: ret = "ㄹ"; break;
                 case Keys.G: ret = "ㅎ"; break;
 
-                default: ret = "XX"; break;
+                default: ret = null; break;
             }
 
             return ret;
@@ -114,7 +114,7 @@ namespace TextProcessorRobot
                 case Keys.X: ret = "ㅐ"; break;
                 case Keys.C: ret = "ㅔ"; break;
 
-                default: ret = "XX"; break;
+                default: ret = null; break;
             }
 
             return ret;
@@ -215,26 +215,35 @@ namespace TextProcessorRobot
                 else if (g_typeMode == TypeMode.Con)
                 {
                     Console.WriteLine("Beat it");
-                    textBox2.Text += GetConso(e.KeyCode);
+                    string tmp = GetConso(e.KeyCode);
+                    if (null != tmp)
+                    {
+                        textBox2.Text += tmp;
 
-                    jaso ch1;
-                    ch1.value = GetConso(e.KeyCode);
-                    ch1.cve = IsCorV(ch1.value);
-                    g_typed.Push(ch1);
+                        jaso ch1;
+                        ch1.value = GetConso(e.KeyCode);
+                        ch1.cve = IsCorV(ch1.value);
+                        g_typed.Push(ch1);
 
-                    ChangeMode(TypeMode.Vow);
+                        ChangeMode(TypeMode.Vow);
+                    }
                 }
                 else
                 {
                     Console.WriteLine("Voo Woo");
-                    textBox2.Text += GetVowel(e.KeyCode);
+                    string tmp = GetVowel(e.KeyCode);
+                    if (null != tmp)
+                    {
+                        textBox2.Text += tmp;
 
-                    jaso ch1;
-                    ch1.value = GetVowel(e.KeyCode);
-                    ch1.cve = IsCorV(ch1.value);
-                    g_typed.Push(ch1);
+                        jaso ch1;
+                        ch1.value = GetVowel(e.KeyCode);
+                        ch1.cve = IsCorV(ch1.value);
+                        g_typed.Push(ch1);
 
-                    ChangeMode(TypeMode.Con);
+                        ChangeMode(TypeMode.Con);
+                    }
+
                 }
             }
 
